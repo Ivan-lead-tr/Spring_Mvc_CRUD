@@ -35,10 +35,7 @@ public class UserController {
                            @RequestParam("email") String email,
                            @RequestParam("age") Byte age,
                            @RequestParam("password") String password){
-
-        User user = new User(firstName, lastName, email, age);
-        user.setPassword(password);
-        userService.saveUser(user);
+        userService.saveUser(firstName, lastName, email, age,password);
 
         return "redirect:/users";
     }
@@ -60,14 +57,7 @@ public class UserController {
                               @RequestParam("age") Byte age,
                               @RequestParam("password") String password) {
 
-        User user = new User();
-        user.setPassword(password);
-        user.setId(id);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setAge(age);
-        userService.updateUser(user);
+        userService.updateUser(id, firstName, lastName, email, age,password);
 
         return "redirect:/users";
 

@@ -21,8 +21,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveUser (String firstName, String lastName,
+                          String email, Byte age, String password) {
+        User user = new User(firstName, lastName, email, age);
+        user.setPassword(passwordEncoder.encode(password));
         userDao.saveUser(user);
 
     }
@@ -36,8 +38,15 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void updateUser(Long id, String firstName, String lastName,
+                           String email, Byte age, String password) {
+        User user = new User();
+        user.setId(id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setAge(age);
+        user.setPassword(passwordEncoder.encode(password));
         userDao.updateUser(user);
     }
 
